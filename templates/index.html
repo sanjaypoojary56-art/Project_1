@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            
+        }
+        .title1
+        {
+           width: divice-width;
+           height: 100px;
+           border-radius: 350px;
+           background-color: peru;
+           align-items: center;
+           text-align: center;
+           display: flex;
+           justify-content: center;
+
+        }
+        .in
+        {
+            align-items: center;
+            width: divice-width;
+           height: 200px;
+           border-radius: 350px;
+           background-color: rgb(250, 85, 112);
+           text-align: center;
+           display: flex;
+           justify-content: center;
+        }
+        .label
+        {
+            width: 50px;
+           height: 40px;
+           border-radius: 30px;
+        }
+        
+        .mybt
+        {
+            text-align: center;
+             width: 150px;
+           height: 50px;
+           border-radius: 30px;
+           display: flex;
+           justify-self: center;
+           justify-content: center;
+           cursor: pointer;
+           padding: 15px;
+           background-color: aqua;
+        }
+        .out{
+           width: 90vw;          /* IMPORTANT: use viewport width */
+    max-width: 600px;
+    height: 300px;
+
+    padding: 10px;
+    border: 1px solid #ccc;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+
+    display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="title1">
+            <h1>RESUME ANALYZER</h1>
+        </div>
+        <br>
+       
+            <br>
+             <br>
+             <div class="in">
+                <label class="lable">Upload File:</label>
+                <input class="inpu" type="file" name="resume" placeholder="choose file">
+             </div>
+             <br>
+             <button class="mybt" type="submit">submit</button>
+             <br>
+             <div class="out">
+                {% if result %}
+                    <h3>AI Feedback:</h3>
+                    <pre>{{result}}</pre>
+                {% else %}
+                    <p>No Result Yet</p>
+                {% endif %}
+             </div>
+
+    </form>
+</body>
+</html>
