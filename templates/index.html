@@ -1,112 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body
-        {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-color: black;
-            align-items: center;
-            display: block;
-            align-items: center;
-            
-        }
-        .title1
-        {
-           width: divice-width;
-           height: 100px;
-           border-radius: 350px;
-           background-color: peru;
-           align-items: center;
-           text-align: center;
-           display: flex;
-           justify-content: center;
+<meta charset="UTF-8">
+<title>AI Resume Analyzer</title>
 
-        }
-        .in
-        {
-            align-items: center;
-            width: divice-width;
-           height: 200px;
-           border-radius: 350px;
-           background-color: rgb(250, 85, 112);
-           text-align: center;
-           display: flex;
-           justify-content: center;
-        }
-        .label
-        {
-            width: 50px;
-           height: 40px;
-           border-radius: 30px;
-        }
-        
-        .mybt
-        {
-            text-align: center;
-             width: 150px;
-           height: 50px;
-           border-radius: 30px;
-           display: flex;
-           justify-self: center;
-           justify-content: center;
-           cursor: pointer;
-           padding: 15px;
-           background-color: aqua;
-        }
-        .out{
-           width: device-width;          /* IMPORTANT: use viewport width */
-    max-width: 9000px;
-    height: 300px;
-    border-radius: 40px;
-            background: #5c96a5;
-    padding: 10px;
-    border: 1px solid #421414;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    box-sizing: border-box;
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0;
+    color: #333;
+}
 
-    overflow-y: auto;
-    overflow-x: hidden;
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
 
+h1 {
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+input[type="file"] {
+    margin: 15px 0;
+}
+
+button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #5a67d8;
+    transform: scale(1.05);
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f4f6ff;
+    border-left: 5px solid #667eea;
+    border-radius: 8px;
+    text-align: left;
     white-space: pre-wrap;
-    word-break: break-word;
-    overflow-wrap: anywhere;
+}
 
-    display: block;
-        }
-        
-    </style>
+.loader {
+    display: none;
+    margin-top: 15px;
+}
+</style>
 </head>
-<body>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="title1">
-            <h1>RESUME ANALYZER</h1>
-        </div>
-        <br>
-       
-            <br>
-             <br>
-             <div class="in">
-                <label class="lable">Upload File:</label>
-                <input class="inpu" type="file" name="resume" placeholder="choose file">
-             </div>
-             <br>
-             <button class="mybt" type="submit">submit</button>
-             <br>
-             <div class="out">
-                {% if result %}
-                    <h3>AI Feedback:</h3>
-                    <p>{{result}}</p>
-                {% else %}
-                    <p>No Result Yet</p>
-                {% endif %}
-             </div>
 
+<body>
+
+<div class="container">
+    <h1>AI Resume Analyzer</h1>
+    <p>Upload your resume and get instant AI feedback</p>
+
+    <form method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+        <input type="file" name="resume" placeholder="Choose a File" required><br>
+        <button type="submit">Analyze Resume</button>
     </form>
+
+    <div class="loader" id="loader">Analyzing...</div>
+
+    {% if result %}
+    <div class="result">
+        {{ result }}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+</script>
+
 </body>
 </html>
