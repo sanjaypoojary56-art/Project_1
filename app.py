@@ -21,7 +21,7 @@ def home():
             result1=ai_response(text)            
     return render_template("index.html",result=result1)
 def ai_response(text):
-    client=gimini.Client(api_key=API_KEY)
+    client=gimini.Client(api_key=os.environ.get("API_KEY"))
     response=client.models.generate_content(model="gemini-2.5-flash",contents=f" First give greetings like hello i am here and then Analyze the resume and give improvements suggestions  and give short and sweet \n:{text}")
     return response.text
     
