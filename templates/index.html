@@ -11,8 +11,9 @@
             padding: 0;
             overflow-x: hidden;
             background-color: black;
-            display: flex;
-            justify-content: center;
+            align-items: center;
+            display: block;
+            align-items: center;
             
         }
         .title1
@@ -59,12 +60,13 @@
            background-color: aqua;
         }
         .out{
-           width: 90vw;          /* IMPORTANT: use viewport width */
-    max-width: 600px;
+           width: device-width;          /* IMPORTANT: use viewport width */
+    max-width: 9000px;
     height: 300px;
-
+    border-radius: 40px;
+            background: #5c96a5;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #421414;
 
     box-sizing: border-box;
 
@@ -99,7 +101,7 @@
              <div class="out">
                 {% if result %}
                     <h3>AI Feedback:</h3>
-                    <pre>{{result}}</pre>
+                    <p>{{result}}</p>
                 {% else %}
                     <p>No Result Yet</p>
                 {% endif %}
