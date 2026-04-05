@@ -2,24 +2,28 @@ from flask import Flask ,render_template,request
 import pdfplumber
 import os
 from google import genai as gimini
+from pdfminer.pdfparser import PDFSyntaxError
 
 app=Flask(__name__)
 app.config["UPLOAD_FOLDER"]="uploads"
 @app.route("/",methods=["GET","POST"])
 def home():
-    text=""
-    result1=""
-    if request.method=="POST":
-        file=request.files["resume"];
-        if file:
-            path=os.path.join(app.config["UPLOAD_FOLDER"],file.filename)
-            file.save(path)
-            with pdfplumber.open(path)as pdf:
-                for page in pdf.pages:
-                    if page.extract_text:
-                        text+=page.extract_text()
-            result1=ai_response(text)            
-    return render_template("index.html",result=result1)
+    try:
+        text=""
+        result1=""
+        if request.method=="POST":
+            file=request.files["resume"];
+            if file:
+                path=os.path.join(app.config["UPLOAD_FOLDER"],file.filename)
+                file.save(path)
+                with pdfplumber.open(path)as pdf:
+                    for page in pdf.pages:
+                        if page.extract_text:
+                            text+=page.extract_text()
+                result1=ai_response(text)            
+        return render_template("index.html",result=result1)
+    except pdfplumber.utils.exceptions.PdfminerException:
+        return render_template("index.html",message="Please Input A PDF File")
 def ai_response(text):
     client=gimini.Client(api_key=os.environ.get("API_KEY"))
     response=client.models.generate_content(model="gemini-2.5-flash",contents=f" First give greetings like hello i am here and then Analyze the resume and give improvements suggestions  and give short and sweet \n:{text}")
